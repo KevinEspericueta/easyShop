@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".login">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <ImageView
+            android:layout_width="363dp"
+            android:layout_height="165dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="80dp"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo" />
+
+        <EditText
+            android:id="@+id/username"
+            style="@style/input"
+            android:layout_gravity="start"
+            android:hint="@string/login_hint_username" />
+
+        <EditText
+            android:id="@+id/password"
+            style="@style/input"
+            android:hint="@string/login_hint_password"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/login"
+            style="@style/button"
+            android:background="@color/colorAccent"
+            android:onClick="login"
+            android:text="@string/login_button"
+            android:textColor="?attr/colorButtonNormal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="signup"
+            android:text="@string/login_create_a_new_account" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

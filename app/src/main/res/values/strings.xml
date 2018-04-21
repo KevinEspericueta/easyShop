@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">easyShop</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="login_hint_username">Username</string>
+    <string name="login_hint_password">Password</string>
+    <string name="login_button">Login</string>
+    <string name="login_create_a_new_account">New account</string>
+    <string name="action_settings">Settings</string>
+</resources>
