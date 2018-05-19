@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easyShop.iml" filepath="$PROJECT_DIR$/easyShop.iml" />
       <module fileurl="file://$PROJECT_DIR$/easyShop-proyecto-master.iml" filepath="$PROJECT_DIR$/easyShop-proyecto-master.iml" />
     </modules>
   </component>

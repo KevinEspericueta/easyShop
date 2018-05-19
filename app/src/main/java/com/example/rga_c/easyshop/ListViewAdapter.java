@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 public class ListViewAdapter extends AppCompatActivity {
     // Declare Variables
     ImageView imgImg;
@@ -35,12 +37,13 @@ public class ListViewAdapter extends AppCompatActivity {
             itemView = inflater.inflate(R.layout.producto_view, null, false);
 
             // Locate the TextViews in listview_item.xml
-            //imgImg = (ImageView) itemView.findViewById(R.id.imagen);
+            imgImg = (ImageView) itemView.findViewById(R.id.imagen);
             txtTitle = (TextView) itemView.findViewById(R.id.Titulo_Nombre);
             txtContenido = (TextView) itemView.findViewById(R.id.Titulo_Price);
 
             txtTitle.setText(nombre);
             txtContenido.setText(precio);
+
         }catch (Exception e){
             e.printStackTrace();
         }

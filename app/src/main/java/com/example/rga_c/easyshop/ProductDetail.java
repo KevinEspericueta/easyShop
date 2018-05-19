@@ -1,11 +1,12 @@
 package com.example.rga_c.easyshop;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,32 +14,37 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import com.bumptech.glide.Glide;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+/**
+ * Created by cloudsourceit on 19/05/18.
+ */
+
+public class ProductDetail extends AppCompatActivity {
     LinearLayout llvResultados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.product_detail);
+
+        Intent myIntent = getIntent(); // gets the previously created intent
+        String nombre = myIntent.getStringExtra("nombre");
+        String precio = myIntent.getStringExtra("precio");
+        String imagen = myIntent.getStringExtra("imagen");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -46,10 +52,27 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        TextView title = (TextView) findViewById(R.id.titleProduct);
+        TextView message = (TextView) findViewById(R.id.messageProduct);
+        ImageView image = (ImageView) findViewById(R.id.imageProduct);
 
-        llvResultados = (LinearLayout) this.findViewById((R.id.llvResultados));
+        title.setText(nombre);
+        message.setText(precio);
+        try {
+            Glide.with(this).load(imagen).into(image);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Button button_carrito = (Button) findViewById(R.id.btn_carrito);
+        button_carrito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Se ha añadido el item al carrito.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
     }
 
     @Override
@@ -85,7 +108,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
-    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -121,7 +143,6 @@ public class MainActivity extends AppCompatActivity
         ListViewAdapter lvAdapter = new ListViewAdapter(this.getApplicationContext());
 
         try {
-            final ArrayList products;
             for (int i = 0; i < 10; i++) {
                 nombre = "Articulo: " + i;
                 precio = "$" + Integer.toString(i);
@@ -162,25 +183,19 @@ public class MainActivity extends AppCompatActivity
                 }
                 //Se llama al metodo getRegisto en donde se le asignan los valores a los label y txt...
                 //El metodo retorna un view
-                view = lvAdapter.getRegistro(nombre,precio);
+                view = lvAdapter.getRegistro(nombre, precio);
 
-                final String precioF = precio;
-                final String nombreF = nombre;
-                final String imageF = image;
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent detailProduct = new Intent(MainActivity.this, ProductDetail.class);
-                        detailProduct.putExtra("nombre", nombreF);
-                        detailProduct.putExtra("precio", precioF);
-                        detailProduct.putExtra("imagen", imageF);
+                        Intent detailProduct = new Intent(ProductDetail.this, ProductDetail.class);
                         startActivity(detailProduct);
                     }
                 });
                 //Agregamos esa vista a nuestro LinearLayout
                 llvResultados.addView(view);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
